@@ -38,17 +38,31 @@ class Campaigns extends Resource
     }
 
     /**
-     * Get Campaign message
+     * Get Message from CampaignMessage
      * @see https://developers.activecampaign.com/reference#retrieve-a-campaign
      *
-     * @param int $campaignid
+     * @param int $campaignMsgid
      * @return string
      */
-    public function getMessage(int $campaignid)
+    public function getMessage(int $campaignMsgid)
     {
         $req = $this->client
             ->getClient()
-            ->get("/api/3/campaignMessages/{$campaignid}/message");
+            ->get("/api/3/campaignMessages/{$campaignMsgid}/message");
+
+        return $req->getBody()->getContents();
+    }
+
+    /**
+    * Get CampaignMessage Object
+    * @param int $campaignid
+    * @return string
+    */
+    public function getCampaignMessage(int $campaignid)
+    {
+        $req = $this->client
+        ->getClient()
+        ->get("/api/3/campaigns/{$campaignid}/campaignMessage");
 
         return $req->getBody()->getContents();
     }
